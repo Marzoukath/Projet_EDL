@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interface de Recherche</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -98,6 +105,12 @@
             font-weight: bold;
             color: #333;
         }
+        a.edit {
+            color: #FFC107;
+        }
+        a.delete {
+            color: #E34724;
+        }
         
     </style>
     
@@ -136,7 +149,11 @@
             
             $searchTerm = "%" . $_POST['search'] . "%";
             $sth->bindParam(':search', $searchTerm, PDO::PARAM_STR);
+
+            // Execute the query
             $sth->execute();
+
+            // Fetch the results
             $rowAll = $sth->fetchAll(PDO::FETCH_ASSOC); ?>
             <table>
                 <tr>
@@ -147,9 +164,9 @@
                     <th>Email</th>
                     <th>Diplome</th>
                     <th>Banque</th>
-                    <th>RIB</th>
+                    <th>RIB(pdf)</th>
                     <th>PDF CIN</th>
-                    <th>PDF RIB</th>
+                    <th>Actions</th>
                 </tr>
                 <?php 
                 foreach ($rowAll as $donnees) { ?>
@@ -161,9 +178,12 @@
                         <td><?php echo $donnees['EMAIL']; ?></td>
                         <td><?php echo $donnees['DIPLOME']; ?></td>
                         <td><?php echo $donnees['BANQUE']; ?></td>
-                        <td><?php echo $donnees['RIB']; ?></td>
+                        <td><a href="http://localhost:8080/<?php echo $donnees['PDF_RIB']; ?>"><?php echo $donnees['RIB']; ?></a></td>
                         <td><a href="http://localhost:8080/<?php echo $donnees['PDF_CIN']; ?>">Voir</a></td>
-                        <td><a href="http://localhost:8080/<?php echo $donnees['PDF_RIB']; ?>">Voir</a></td>
+                        <td>
+                            <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                            <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                        </td>
                     </tr>
                 <?php
                 } ?>
@@ -196,9 +216,9 @@
                     <th>Email</th>
                     <th>Diplome</th>
                     <th>Banque</th>
-                    <th>RIB</th>
+                    <th>RIB(pdf)</th>
                     <th>PDF CIN</th>
-                    <th>PDF RIB</th>
+                    <th>Actions</th>
                 </tr>
                 <?php 
                 foreach ($rowAll as $donnees) { ?>
@@ -210,9 +230,12 @@
                         <td><?php echo $donnees['EMAIL']; ?></td>
                         <td><?php echo $donnees['DIPLOME']; ?></td>
                         <td><?php echo $donnees['BANQUE']; ?></td>
-                        <td><?php echo $donnees['RIB']; ?></td>
+                        <td><a href="http://localhost:8080/<?php echo $donnees['PDF_RIB']; ?>"><?php echo $donnees['RIB']; ?></a></td>
                         <td><a href="http://localhost:8080/<?php echo $donnees['PDF_CIN']; ?>">Voir</a></td>
-                        <td><a href="http://localhost:8080/<?php echo $donnees['PDF_RIB']; ?>">Voir</a></td>
+                        <td>
+                            <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                            <a href="delete.php?id_acteur=<?php echo $donnees['id']; ?>" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                        </td>
                     </tr>
                 <?php
                 } ?>

@@ -15,25 +15,27 @@
         $prenom = $_POST['prenom'];
         $lieu_naissance = $_POST['lieu_naissance'];
 
-        if (!preg_match('/^[a-zA-ZÀ-ÿ\s\'\-\.]+$/', $nom)) 
-        {
-            $errors['nom'] = 'Le nom ne doit contenir pas des caractères numeriques.';
+        if (!preg_match('/^[a-zA-ZÀ-ÿ\s\'\-\.]+$/', $nom)) {
+            $errors['nom'] = 'Le nom ne doit pas contenir des caractères numériques.';
         }
-        if (!preg_match('/^[a-zA-ZÀ-ÿ\s\'\-\.]+$/', $prenom))  {
-            $errors['prenom'] = 'Le prénom ne doit pas contenir des caractères numeriques.';
+        if (!preg_match('/^[a-zA-ZÀ-ÿ\s\'\-\.]+$/', $prenom)) {
+            $errors['prenom'] = 'Le prénom ne doit pas contenir des caractères numériques.';
         }
-        if (!preg_match('/^[a-zA-ZÀ-ÿ\s\'\-\.]+$/', $lieu_naissance))  {
-            $errors['lieu_naissance'] = 'Le lieu de naissance ne doit pas contenir caractères numeriques.';
+        if (!preg_match('/^[a-zA-ZÀ-ÿ\s\'\-\.]+$/', $lieu_naissance)) {
+            $errors['lieu_naissance'] = 'Le lieu de naissance ne doit pas contenir des caractères numériques.';
         }
+
         if (empty($errors)) {
             $uploaddir = 'storage/';
-            $uploadfile = $uploaddir . 'CNI_' . $_POST['rib'] . '.pdf';
-            $uploadfile = $uploaddir . 'RIB_' . $_POST['rib'] . '.pdf';
-            if (move_uploaded_file($_FILES['pdf_cin']['tmp_name'], $uploadfile) and move_uploaded_file($_FILES['pdf_rib']['tmp_name'], $uploadfile)) {
+            $uploadfile_cin = $uploaddir . 'CNI_' . $_POST['rib'] . '.pdf';
+            $uploadfile_rib = $uploaddir . 'RIB_' . $_POST['rib'] . '.pdf';
+
+            if (move_uploaded_file($_FILES['pdf_cin']['tmp_name'], $uploadfile_cin) && move_uploaded_file($_FILES['pdf_rib']['tmp_name'], $uploadfile_rib)) {
                 $servername = '127.0.0.1';
                 $username = 'root';
                 $password = '';
                 $dbname = 'edl_acteurs';
+
                 try {
                     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
                     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -48,24 +50,26 @@
                     $sth->bindParam(':dipl', $_POST['diplome']);
                     $sth->bindParam(':bque', $_POST['banque']);
                     $sth->bindParam(':rib', $_POST['rib']);
-                    $sth->bindParam(':pdf_cin', $uploadfile);
-                    $sth->bindParam(':pdf_rib', $uploadfile);
+                    $sth->bindParam(':pdf_cin', $uploadfile_cin);
+                    $sth->bindParam(':pdf_rib', $uploadfile_rib);
                     $sth->execute();
                     $conn = null;
+
+                    header('Location: success.php');
+                    exit;
+
                 } catch (PDOException $e) {
-                    //echo "Erreur : " . $e->getMessage();
-                    
-                    echo "Le RIB et l'email existe deja " ;
+                    echo "Le RIB et l'email existent déjà";
                 }
             } else {
                 echo "Possible file upload attack!\n";
             }
         }
-    } ?>
+    }
+    ?>
     <form action="interface_user.php" method="post" enctype="multipart/form-data">
-    <h2 style="text-align: center;">Formulaire d'enregistrement</h2>
-    <hr>
-    
+        <h2 style="text-align: center;">Formulaire d'enregistrement</h2>
+        <hr>
         <label for="nom">Nom :</label>
         <input type="text" id="nom" name="nom" required pattern="[a-zA-ZÀ-ÿ\s\'\-\.]+" title=" Pas de caractères numeriques" value="<?php echo isset($_POST['nom']) ? htmlspecialchars($_POST['nom']) : ''; ?>">
         <?php if (isset($errors['nom'])) echo '<p style="color: red;">' . $errors['nom'] . '</p>'; ?>
@@ -92,7 +96,7 @@
             <option value="">Sélectionnez une banque</option>
             <option value="Bank of Africa" <?php echo (isset($_POST['banque']) && $_POST['banque'] == 'Bank of Africa') ? 'selected' : ''; ?>>Bank of Africa</option>
             <option value="Ecobank" <?php echo (isset($_POST['banque']) && $_POST['banque'] == 'Ecobank') ? 'selected' : ''; ?>>Ecobank</option>
-            <option value="Orabank" <?php echo (isset($_POST['banque']) && $_POST['banque'] == 'Orabank') ? 'selected' : ''; ?>>Société Générale Bénin</option>
+            <option value="Orabank" <?php echo (isset($_POST['banque']) && $_POST['banque'] == 'Orabank') ? 'selected' : ''; ?>>Orabank</option>
             <option value="Société Générale Bénin" <?php echo (isset($_POST['banque']) && $_POST['banque'] == 'Société Générale Bénin') ? 'selected' : ''; ?>>Société Générale Bénin</option>
             <option value="BANQUE ATLANTIQUE" <?php echo (isset($_POST['banque']) && $_POST['banque'] == 'BANQUE ATLANTIQUE') ? 'selected' : ''; ?>>BANQUE ATLANTIQUE</option>
             <option value="BSIC" <?php echo (isset($_POST['banque']) && $_POST['banque'] == 'BSIC') ? 'selected' : ''; ?>>BANQUE SAHELO-SAHARIENNE POUR L'INVESTISSEMENT ET LE COMMERCE</option>
