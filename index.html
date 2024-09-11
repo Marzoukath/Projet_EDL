@@ -3,91 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accueil - Digital Library</title>
-    <link rel="shortcut icon" href="assets/images/logo/icon_dl.png" type="image/x-icon">
-    <link rel="stylesheet" href="page_accueil.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Importance de Manger</title>
+    <style>
+        /* Styles généraux */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            background-color: #f7f9fc;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #6bbf59;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        section.content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        article {
+            width: 45%;
+            margin-bottom: 20px;
+        }
+
+        .text-section h2 {
+            color: #6bbf59;
+            margin-bottom: 10px;
+            font-size: 1.8rem;
+        }
+
+        .text-section p {
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        .image-section img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .image-section img:hover {
+            transform: scale(1.05);
+        }
+
+        footer {
+            background-color: #6bbf59;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer p {
+            font-size: 1rem;
+        }
+    </style>
 </head>
 <body>
     <header>
-        
-            <div style="display:flex;">
-                <div class="header-container">
-                    <img src="../image/logo_black.png" alt="Logo" class="logo">
-                </div>
-                <ul>
-                    <li><a href="page_accueil.html"><i class="fa fa-home fa-10x" aria-hidden="true"></i> Accueil</a></li>
-                    <li><a href="login_1.php"><i class="fa fa-file fa-10x" aria-hidden="true"></i> Ajouter un fichier</a></li>
-                    <li>Consulter un fichier</li>
-                    <li><a href="select_typeusers.php"><i class="fa fa-key fa-10x" aria-hidden="true"></i>S'inscrire</a></li>
-                    <li><a href="login.php"><i class="fa fa-key fa-10x" aria-hidden="true"></i>Se connecter</a></li>
-                </ul>
-            </div>
+        <h1>L'Importance de Manger Sainement</h1>
     </header>
-    <main>
-        <section id="banner">
-            <h1>La documentation en ligne</h1>
-            <p>Bienvenue dans votre bibliothèque numérique. Inscrivez-vous !!!</p>
-        </section>
-        <section id="newsletter">
-            <h1>Inscrivez-vous à ma newsletter</h1>
-            <form id="newsletter-form">
-                <input type="email" id="newsletter-email" placeholder="Entrer Email..." required />
-                <button type="submit" style="margin-left: 5px;">M'inscrire</button>
-            </form>
-        </section>
-    </main>
-    <footer class="footer">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12 footer-copyright d-flex flex-wrap align-items-center justify-content-between">
-                    <p class="mb-0 f-w-600">Copyright 2024 © <b>Digital Library</b></p>
-                    <p class="mb-0 f-w-600">AGBODJA Marzoukath <b>&</b> BATOKO Chahidath</p>
-                </div>
-            </div>
-        </div>
+
+    <section class="content">
+        <article class="text-section">
+            <h2>Pourquoi une bonne alimentation est essentielle ?</h2>
+            <p>Manger sainement fournit à votre corps les nutriments nécessaires pour bien fonctionner. Cela renforce le système immunitaire, améliore la concentration et maintient l'énergie tout au long de la journée.</p>
+        </article>
+
+        <article class="image-section">
+            <img src="healthy-food.jpg" alt="Repas sain">
+        </article>
+
+        <article class="text-section">
+            <h2>Des aliments riches en vitamines</h2>
+            <p>Les fruits et légumes sont remplis de vitamines et minéraux essentiels. Ils contribuent à la bonne santé des cellules et au bon fonctionnement de votre système digestif.</p>
+        </article>
+
+        <article class="image-section">
+            <img src="fruits.jpg" alt="Fruits frais">
+        </article>
+
+        <article class="text-section">
+            <h2>L'hydratation, un élément clé</h2>
+            <p>Boire de l'eau régulièrement est aussi important que manger équilibré. L'hydratation permet de réguler la température du corps et d'améliorer les fonctions cognitives.</p>
+        </article>
+
+        <article class="image-section">
+            <img src="water.jpg" alt="Un verre d'eau">
+        </article>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 - Importance de la nutrition | Designed with ❤️ by Nutrition Lovers</p>
     </footer>
-
-    <script type="text/javascript">
-    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-    (function(){
-    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-    s1.async=true;
-    s1.src='https://embed.tawk.to/666a26b9981b6c56477c860a/1i07aehfp';
-    s1.charset='UTF-8';
-    s1.setAttribute('crossorigin','*');
-    s0.parentNode.insertBefore(s1,s0);
-    })();
-    </script>
-
-    <!-- JavaScript pour gérer la soumission du formulaire -->
-    <script>
-        document.getElementById('newsletter-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            var email = document.getElementById('newsletter-email').value;
-
-            fetch('subscribe_newsletter.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ email: email })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert('Inscription à la newsletter réussie!');
-                } else {
-                    alert('Compte non trouvé ou erreur lors de l\'inscription.');
-                }
-            })
-            .catch(error => {
-                console.error('Erreur:', error);
-            });
-        });
-    </script>
 </body>
 </html>
+
