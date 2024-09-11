@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil - Digital Library</title>
+    <link rel="shortcut icon" href="assets/images/logo/icon_dl.png" type="image/x-icon">
+    <link rel="stylesheet" href="page_accueil.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <header>
+        
+            <div style="display:flex;">
+                <div class="header-container">
+                    <img src="../image/logo_black.png" alt="Logo" class="logo">
+                </div>
+                <ul>
+                    <li><a href="page_accueil.html"><i class="fa fa-home fa-10x" aria-hidden="true"></i> Accueil</a></li>
+                    <li><a href="login_1.php"><i class="fa fa-file fa-10x" aria-hidden="true"></i> Ajouter un fichier</a></li>
+                    <li>Consulter un fichier</li>
+                    <li><a href="select_typeusers.php"><i class="fa fa-key fa-10x" aria-hidden="true"></i>S'inscrire</a></li>
+                    <li><a href="login.php"><i class="fa fa-key fa-10x" aria-hidden="true"></i>Se connecter</a></li>
+                </ul>
+            </div>
+    </header>
+    <main>
+        <section id="banner">
+            <h1>La documentation en ligne</h1>
+            <p>Bienvenue dans votre bibliothèque numérique. Inscrivez-vous !!!</p>
+        </section>
+        <section id="newsletter">
+            <h1>Inscrivez-vous à ma newsletter</h1>
+            <form id="newsletter-form">
+                <input type="email" id="newsletter-email" placeholder="Entrer Email..." required />
+                <button type="submit" style="margin-left: 5px;">M'inscrire</button>
+            </form>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 footer-copyright d-flex flex-wrap align-items-center justify-content-between">
+                    <p class="mb-0 f-w-600">Copyright 2024 © <b>Digital Library</b></p>
+                    <p class="mb-0 f-w-600">AGBODJA Marzoukath <b>&</b> BATOKO Chahidath</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/666a26b9981b6c56477c860a/1i07aehfp';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+    </script>
+
+    <!-- JavaScript pour gérer la soumission du formulaire -->
+    <script>
+        document.getElementById('newsletter-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var email = document.getElementById('newsletter-email').value;
+
+            fetch('subscribe_newsletter.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email: email })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Inscription à la newsletter réussie!');
+                } else {
+                    alert('Compte non trouvé ou erreur lors de l\'inscription.');
+                }
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+            });
+        });
+    </script>
+</body>
+</html>
